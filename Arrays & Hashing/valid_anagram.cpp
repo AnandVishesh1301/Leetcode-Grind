@@ -9,6 +9,22 @@
 // Input: s = "jar", t = "jam"
 // Output: false
 
+// Approach:
+// - Two strings are anagrams if they have the same character counts.
+// - We use two unordered hash maps to count the frequency of each character in both strings.
+// - If the frequencies match for all characters, the strings are anagrams.
+// - First, check if the sizes of both strings are the same — if not, return false early.
+// - Then populate both maps and compare each entry in the first map with the second.
+//
+// Time Complexity: O(N), where N is the length of the strings (assuming both are of similar length).
+//                    - Each character is processed once for counting and once for comparison.
+// Space Complexity: O(1) — since we are only storing counts of lowercase English letters (fixed size 26).
+//                     (Technically O(26) = O(1) in this case)
+//
+// Solution Stats:
+// Runtime: 52 ms, Beats: 33.78% of C++ users
+
+
 #include <iostream>
 #include <unordered_map>
 #include <vector>
