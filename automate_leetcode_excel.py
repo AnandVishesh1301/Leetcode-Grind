@@ -87,6 +87,8 @@ def read_comment_block(file_path):
 
 def append_to_excel(excel_path, row):
     excel_path = os.path.expanduser(excel_path)
+    print(f"Saving to: {os.path.abspath(excel_path)}")
+
     # Create workbook if it doesn't exist
     if not os.path.exists(excel_path):
         wb = openpyxl.Workbook()
@@ -103,6 +105,26 @@ def append_to_excel(excel_path, row):
     row = [str(item) if item is not None else '' for item in row]
     ws.append(row)
     wb.save(excel_path)
+    
+def check_if_problem_exists(excel_path, problem_title):
+    """Check if a problem with the given title already exists in the Excel file."""
+    excel_path = os.path.expanduser(excel_path)
+    if not os.path.exists(excel_path):
+        return False  # Excel file doesn't exist, so problem doesn't exist
+    
+    wb = openpyxl.load_workbook(excel_path)
+    ws = wb.active
+    
+    title_col = 4
+    
+    # Check each row for the title
+    for row in range(2, ws.max_row + 1):  # Start from row 2 to skip header
+        cell_value = ws.cell(row=row, column=title_col).value
+        if cell_value and cell_value.strip() == problem_title:
+            return True
+    
+    return False
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Automate LeetCode Excel updates')
@@ -118,6 +140,11 @@ if __name__ == '__main__':
         category = os.path.basename(os.path.dirname(file_path))
         comment_block = read_comment_block(file_path)
         data = extract_fields(comment_block, category, args.api_key)
+        # Check if problem already exists in Excel
+        if check_if_problem_exists(args.excel, data.get('title')):
+            print(f"Problem '{data.get('title')}' already exists in the Excel file. Skipping.")
+            continue
+        
         row = [
             today,
             args.day,
