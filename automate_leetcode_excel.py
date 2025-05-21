@@ -190,5 +190,6 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 
+### Commands to run the bash function leet:
 #Default Values: leet "Arrays & Hashing/valid_anagram.cpp"
 #Custom Date and Day: leet --date 05/18/2025 --day 2 "Arrays & Hashing/valid_anagram.cpp"
