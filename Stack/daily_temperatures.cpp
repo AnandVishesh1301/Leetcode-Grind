@@ -52,7 +52,6 @@ public:
             }
             s.push({temperatures[i], i});  // Push current temp with its index
         }
-
         return result;
     }
 };
