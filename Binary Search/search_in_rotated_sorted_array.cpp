@@ -1,5 +1,4 @@
 // 33. Search in Rotated Sorted Array
-// ----------------------------------
 // Problem:
 // Given a rotated sorted array of unique integers, find the index of a given target value.
 // The array is rotated at an unknown pivot, e.g. [0,1,2,4,5,6,7] → [4,5,6,7,0,1,2].
@@ -29,7 +28,6 @@
 // Space Stats (from LeetCode submission):
 //   Memory Usage : 15.12 MB
 //   Beats        : 66.46 % of C++ users
-// ---------------------------------------------------------------------------
 
 
 class Solution {
