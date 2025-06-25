@@ -47,3 +47,34 @@ public:
         return prev; // prev now points to new head
     }
 };
+
+// Approach 2: Hash Map to Track Visited Nodes (Less Space Efficient)
+// ---------------------------------------------------------
+// - Store each visited node in a map/set.
+// - If a node is revisited, we found a cycle.
+// - Otherwise, move forward until the end.
+//
+// Time Complexity : O(n)
+// Space Complexity: O(n)
+//
+// Example: A -> B -> C -> D -> B (cycle at B)
+// - As we traverse, we store nodes. When we reach B again, return true.
+// ---------------------------------------------------------
+
+class Solution {
+public:
+    bool hasCycle(ListNode* head) {
+        unordered_map<ListNode*, bool> listMap;
+        ListNode* curr = head;
+
+        if (!head || !head->next) return false; // Edge case
+
+        while (curr != nullptr) {
+            if (listMap.find(curr) != listMap.end()) return true;
+            listMap[curr] = true;
+            curr = curr->next;
+        }
+
+        return false;
+    }
+};
