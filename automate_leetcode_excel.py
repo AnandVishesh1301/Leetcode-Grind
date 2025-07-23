@@ -10,19 +10,13 @@ import openpyxl
 import requests
 from dotenv import load_dotenv
 
-# -----------------------------------------------------------------------------
-# Configuration helpers
-# -----------------------------------------------------------------------------
+
 load_dotenv()
 
 GEMINI_ENDPOINT = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
     "gemini-2.0-flash:generateContent"
 )
-
-# -----------------------------------------------------------------------------
-# Gemini interaction
-# -----------------------------------------------------------------------------
 
 def call_gemini(prompt: str, api_key: Optional[str] = None) -> str:
     """Send *prompt* to the Gemini REST endpoint and return the first reply."""
@@ -85,9 +79,7 @@ def extract_fields(source_code: str, category: str, api_key: Optional[str]) -> d
     except json.JSONDecodeError as exc:
         raise ValueError(f"Gemini did not return valid JSON:\n{content}") from exc
 
-# -----------------------------------------------------------------------------
-# Local helpers
-# -----------------------------------------------------------------------------
+#  helpers
 
 def read_source(file_path: str) -> str:
     """Return the *entire* file contents as a UTF‑8 string."""
@@ -140,9 +132,7 @@ def check_if_problem_exists(excel_path: str, problem_title: str) -> bool:
             return True
     return False
 
-# -----------------------------------------------------------------------------
-# CLI entry‑point
-# -----------------------------------------------------------------------------
+# CLI entrt point
 
 def main() -> None:
     parser = argparse.ArgumentParser(
